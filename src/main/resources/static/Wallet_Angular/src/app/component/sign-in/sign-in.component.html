@@ -1,0 +1,52 @@
+  
+
+ <br><br>
+ <div class="col-lg-7 col-md-7 offset-lg-3 offset-md-3">
+     <h3 class="text-primary">Login</h3>
+     <br>
+ 
+     <form [formGroup]="loginForm" (ngSubmit)="logincheck()">
+         <!-- Mobile NUmber -->
+         <div class="form-group">
+             <label for="mob_number" class="required">Mobile Number : </label>
+             <input type="text" class="form-control" formControlName="mob_number" placeholder="Mobile Number"/>
+ 
+             <div *ngIf="submitted && loginForm.controls.mob_number.errors" class="error">
+                     <div class="text-danger" *ngIf="loginForm.controls.mob_number.errors.required">
+                         Mobile Number is Required..
+                     </div>
+                     <div class="text-danger" *ngIf="loginForm.controls.mob_number.errors.pattern">
+                         Mobile Number must be 10 digits and should be numeric..!
+                     </div>
+                 </div>
+ 
+         </div>  
+         <!-- End Of Mobile Number -->
+ 
+ 
+         <div class="form-group">
+             <label for="password" class="required">Password : </label>
+             <input type="password" class="form-control" formControlName="password" placeholder="Password"/>
+             <div *ngIf="submitted && loginForm.controls.password.errors" class="error">
+                 <div class="text-danger" *ngIf="loginForm.controls.password.errors.required">
+                     Password is Required..
+                 </div>
+                 
+             </div>
+         </div>  
+         <!-- End Of password -->
+ 
+         <button class="btn btn-outline-success" type="submit"><b>Login</b></button> &nbsp;
+         <a class="btn btn-outline-danger" routerLink="/homepage"><b>Cancel</b></a>&nbsp;&nbsp;<br><br>
+         <!-- <a class=" text-primary" routerLink="/forgot-password"><b>Forgot Password?</b></a><br><br> -->
+         <a class=" text-primary" routerLink="/register"><h6>Not Registered?<br>Click Here to Register</h6></a><br>
+         
+         <div *ngIf="invalidLogin">
+                 <div class="text-danger">
+                         Invalid Email or Password.
+                 </div>
+ 
+         </div>
+         <br>
+     </form>
+ </div>

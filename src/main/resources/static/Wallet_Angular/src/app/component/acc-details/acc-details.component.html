@@ -1,0 +1,27 @@
+<div class="navbar">
+  <div  class=" col-lg-12 col-md-12 text-hover" style="background-color: #555" >
+      
+   <a  routerLink="/loginHome"><img src="assets/images/HomeIcon.png" style="width: 4%; height:8%;margin-left: 10px"/><b>&nbsp;Home</b></a> 
+   <a  routerLink="/accDetails"><img src="assets/images/ProfileIcon.png" style="width: 4%; height:8%;margin-left: 10px"/><b>Profile</b></a>
+   <a class="offset-lg-6 offset-md-6" routerLink="/logout"><img src="assets/images/LogoutIcon.png" style="width: 4%; height:8%;margin-left: 10px"/><b>&nbsp;Logout</b></a> 
+  
+  </div>
+</div>
+<div class="container-fluid">
+<div class="row ">
+<div style="padding: 30px; background:rgb(2, 2, 92); color:cornsilk; margin-top: 2%;" class=" col-lg-12 col-md-12 text-left font-weight-bold">
+
+<h3 >Name: <span class="colour"> {{userData.name}}</span></h3>
+<h3 >Username: <span class="colour">{{userData.username}}</span></h3>
+<h3 >Current Wallet Balance: <span class="colour">{{userData.balance}}</span></h3>
+<h3 >E-Mail Id: <span class="colour">{{userData.mail}}</span></h3>
+<h3 >Mobile Number: <span class="colour">{{userData.mob_number}}</span></h3>
+</div>
+</div>
+</div>
+<br>
+<br>
+<div class="offset-lg-4 offset-md-4">
+<a class="btn btn-outline-success" routerLink="/update" ><b>Update Profile</b></a> &nbsp;
+<a class="btn btn-outline-danger" routerLink="/loginHome"><b>Back</b></a><br><br>
+</div>

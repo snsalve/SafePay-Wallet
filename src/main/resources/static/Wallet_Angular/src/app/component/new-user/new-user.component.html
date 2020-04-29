@@ -1,0 +1,181 @@
+<!-- <br>
+<h3 style="color: blue; text-align: center;">Welcome to new user Registration</h3>
+
+<div class="container-fluid">
+  <form #enForm ="ngForm" >
+         
+
+      <div class="form-group">
+          <label>Name</label>
+          <input required type="text"  [(ngModel)] = "cust.name" name="name" [class.is-invalid]="cname.invalid && cname.touched" class="form-control" #cname="ngModel"/>
+          <small class = "text-danger" [class.d-none] = "cname.valid || cname.untouched">Name is Mandatory</small>
+      </div>
+      <br>
+
+      <div class="form-group">
+        <label>Username</label>
+        <input required type="text"  [(ngModel)] = "cust.username" name="username" [class.is-invalid]="cusername.invalid && cusername.touched" class="form-control" #cusername="ngModel" maxlength="10" minlength="8" />
+        <small class = "text-danger" [class.d-none] = "cusername.valid || cusername.untouched">Username is Mandatory</small>
+    </div>
+    <br>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input required type="password"  [(ngModel)] = "cust.password" name="password" [class.is-invalid]="cpass.invalid && cpass.touched" class="form-control" #cpass="ngModel" maxlength="10" minlength="8" />
+        <small class = "text-danger" [class.d-none] = "cpass.valid || cpass.untouched">Password is Mandatory</small>
+     </div>
+    <br>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input required type="email"  [(ngModel)] = "cust.mail" name="mail" [class.is-invalid]="cmail.invalid && cmail.touched" class="form-control" #cmail="ngModel" />
+        <small class = "text-danger" [class.d-none] = "cmail.valid || cmail.untouched">Mail Id is Mandatory</small>
+    </div>
+    <br>
+
+    <div class="form-group">
+      <label>Mobile No.</label>
+      <input required type="number"  [(ngModel)] = "cust.mob_number" name="mob_number" [class.is-invalid]="cmob.invalid && cmob.touched" class="form-control" #cmob="ngModel" />
+      <small class = "text-danger" [class.d-none] = "cmob.valid || cmob.untouched">Mobile number is Mandatory</small>
+  </div>
+  <br>
+      <button [disabled]="enForm.form.invalid" class="btn btn-primary" (click)="newUser()">Register</button>&nbsp;&nbsp;&nbsp;&nbsp;
+      <button [disabled]="enForm.form.invalid" class="btn btn-primary" routerLink="/homepage">Login</button>   
+  </form>
+</div>
+<br>
+<br>
+<h6 style="color: blue;">Already Registered?</h6>
+<h6><a style="color: blue;" routerLink="/login">Click Here to Login.</a></h6><br> -->
+
+<br>
+<div class="col-md-12 col-lg-12">
+    <h3 class="text-primary" style="margin-left: 25%;">Welcome to Registration</h3>
+    <br>
+    <form [formGroup]="addForm" (ngSubmit)="newUser()">
+        <!-- Name Text Box -->
+        <div class="form-group row">
+            <label for="name" class="required col-lg-4 text-right font-weight-bold">
+                Name :
+            </label>
+            <div class="col-lg-8">
+                    <input type="text" class="form-control " placeholder="Name" formControlName="name" />
+
+                    <div *ngIf="submitted && addForm.controls.name.errors">
+                        <div class="text-danger" *ngIf="addForm.controls.name.errors.required">
+                            Name is required..!
+        
+                        </div>
+                        <div class="text-danger" *ngIf="addForm.controls.name.errors.pattern">
+                            Maximum 30 characters long..!
+                        </div>
+        
+                    </div>
+            </div>
+            
+
+        </div>
+        <!--  End of Name Text Box -->
+
+         <!-- UserName Text Box -->
+         <div class="form-group row">
+          <label for="username" class="required col-lg-4 text-right font-weight-bold">
+              Username :
+          </label>
+          <div class="col-lg-8">
+                  <input type="text" class="form-control " placeholder="Username" formControlName="username" />
+
+                  <div *ngIf="submitted && addForm.controls.username.errors">
+                      <div class="text-danger" *ngIf="addForm.controls.username.errors.required">
+                          Username is required..!
+      
+                      </div>
+                      <div class="text-danger" *ngIf="addForm.controls.username.errors.pattern">
+                        Username may have text and numbers and length min 8 and max 12 characters.
+                      </div>
+      
+                  </div>
+          </div>
+          
+
+      </div>
+      <!--  End of UserName Text Box -->
+
+        <!-- Mobile Number Text Box -->
+        <div class="form-group row">
+            <label for="mob_number" class="required col-lg-4 text-right font-weight-bold">
+                Mobile Number :
+            </label>
+            <div class="col-lg-8">
+                    <input type="text" class="form-control " placeholder="Mobile Number" formControlName="mob_number" />
+
+                    <div *ngIf="submitted && addForm.controls.mob_number.errors">
+                        <div class="text-danger" *ngIf="addForm.controls.mob_number.errors.required">
+                            Mobile Number is required..!
+        
+                        </div>
+                        <div class="text-danger" *ngIf="addForm.controls.mob_number.errors.pattern">
+                            Mobile Number must be 10 digits and should be numeric..!
+                        </div>
+        
+                    </div>
+            </div>
+            
+
+        </div>
+        <!--  End of Mobile Number Text Box -->
+
+        <!-- Email Text Box -->
+        <div class="form-group row">
+            <label for="mail" class="required col-lg-4 text-right font-weight-bold">
+                Email :
+            </label>
+            <div class="col-lg-8">
+                    <input type="emailId" class="form-control " placeholder="Email" formControlName="mail" />
+
+                    <div *ngIf="submitted && addForm.controls.mail.errors">
+                        <div class="text-danger" *ngIf="addForm.controls.mail.errors.required">
+                            Email is required..!
+        
+                        </div>
+                        <div class="text-danger" *ngIf="addForm.controls.mail.errors.mail ">
+                            Invalid Email Address..!
+                        </div>
+        
+                    </div>
+            </div>
+          
+
+        </div>
+        <!--  End of Email Text Box -->
+
+        <!-- Password Text Box -->
+        <div class="form-group row">
+            <label for="password" class="required col-lg-4 text-right font-weight-bold">
+                Password :
+            </label>
+            <div class="col-lg-8">
+                    <input type="password" class="form-control " placeholder="Password" formControlName="password" />
+
+                    <div *ngIf="submitted && addForm.controls.password.errors">
+                        <div class="text-danger" *ngIf="addForm.controls.password.errors.required">
+                            Password is required..!
+                        </div>
+                        <div class="text-danger" *ngIf="addForm.controls.password.errors.pattern">
+                            Password should have at least One uppercase,one lowercase letter,one numeric
+                            ,one special character and length min 8 and max 15 characters.
+                        </div>
+                    </div>
+            </div>
+        </div>        
+        <!--  End of Password Text Box -->
+
+        <div class="text-right">
+            <button class="btn btn-outline-success" type="submit"><b>Submit</b></button>&nbsp;&nbsp;
+            <button class="btn btn-outline-warning" type="reset"><b>Reset</b></button> &nbsp;&nbsp;
+            <a class="btn btn-outline-danger" routerLink="/homepage"><b>Cancel</b></a>
+
+        </div>
+    </form>
+    <br>
+</div>
