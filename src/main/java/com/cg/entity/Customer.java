@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Customer implements Serializable{
-	//Test Commet
+	
 	private static final long serialVersionUID = 1L;
 	private String name;
 	@Id
