@@ -38,10 +38,14 @@ export class UpdateComponent implements OnInit {
     }
 
   this.walletService.updateUser(this.editProfileForm.value).subscribe( data => {
-    alert(`Data Updated Successfully`);
-    this.router.navigate(['accDetails']);
-  }, err => {
-    console.log(err.stack);
+    if(data){
+      alert(`Data Updated Successfully`);
+      this.router.navigate(['accDetails']);
+    }
+    else{
+      alert(`Username cannot be changed`);
+      return;
+  }
 }) 
 }
 }

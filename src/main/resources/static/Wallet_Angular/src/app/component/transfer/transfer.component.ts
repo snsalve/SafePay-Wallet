@@ -13,6 +13,7 @@ export class TransferComponent implements OnInit {
   transferForm : FormGroup;
   submitted : boolean= false;
   customer: Customer1[];
+  userdata1 = new Customer1("","","",null,"",null);
   user = sessionStorage.getItem('username');
   constructor(private formBuilder:FormBuilder, private walletService: WalletService, private router:Router) { }
 
@@ -22,16 +23,19 @@ export class TransferComponent implements OnInit {
     this.submitted=true
     if(this.transferForm.invalid)
       return;
-    
+      let password=this.transferForm.controls.password.value;
+      if(password!=this.userdata1.password){
+        alert("Password Invalid");
+        return;
+      }
     let amount = this.transferForm.controls.amount.value;
     let mobile = this.transferForm.controls.mob_number.value;
-    let password = this.transferForm.controls.password.value;
     console.log(this.mob);
     this.walletService.transfer(mobile, amount, password, this.user).subscribe(data=>{
       if(data)
         alert("Money Transfer Successful");
       else
-        alert("Money Transfer Failed");
+        alert("Money Transfer Failed. Insufficient funds in wallet.");
     })
   }
 
@@ -54,7 +58,7 @@ export class TransferComponent implements OnInit {
         password:['',Validators.required]
       });
     }
-
+    this.walletService.getUser(this.user).subscribe(data=>this.userdata1=data)
     this.walletService.getAllUser().subscribe( data=> this.customer=data);
   }
 

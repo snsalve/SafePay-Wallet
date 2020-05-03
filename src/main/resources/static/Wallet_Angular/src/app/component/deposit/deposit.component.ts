@@ -15,7 +15,6 @@ export class DepositComponent implements OnInit {
   submitted : boolean= false;
   user = sessionStorage.getItem('username');
   userdata = new Customer1("","","",null,"",null);
-  userdata1 = new Customer1("","","",null,"",null);
 
   constructor(private formBuilder:FormBuilder,private walletService: WalletService, private router:Router) { }
   ngOnInit() {
@@ -24,20 +23,15 @@ export class DepositComponent implements OnInit {
       else{
         this.addMoneyForm= this.formBuilder.group({
           amount: ['', [Validators.required,Validators.max(100000), Validators.pattern("[1-9][0-9]{0,4}")]],
-          password:['',Validators.required]
         });
       }
-      this.walletService.getUser(this.user).subscribe(data=>this.userdata1=data)
   }
+
   public addMoney(){
     this.submitted=true;
     if(this.addMoneyForm.invalid)
       return;
-    let pass=this.addMoneyForm.controls.password.value;
-    if(pass!=this.userdata1.password){
-      alert("Password Invalid");
-      return;
-    }
+    
     this.userdata.username=this.user;
     let amount=this.addMoneyForm.controls.amount.value;
     this.walletService.deposit(this.userdata,amount).subscribe( 
