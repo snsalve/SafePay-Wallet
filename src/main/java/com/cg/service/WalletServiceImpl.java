@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.cg.entity.Customer;
 import com.cg.entity.Transactions;
+import com.cg.exceptions.InsufficientFundsException;
+import com.cg.exceptions.UserNotFoundException;
 import com.cg.repository.CustomerRepository;
 @Service
 public class WalletServiceImpl implements WalletServiceInterface{
@@ -31,11 +33,16 @@ public class WalletServiceImpl implements WalletServiceInterface{
 	}
 
 	@Override
-	public Optional<Customer> getUserById(String uname) {
-		System.out.println("USERNAME:" + uname);
-		Optional<Customer> cc =  custRepo.findById(uname);
-		System.out.println("HI"+cc);
+	public Customer getUserById(String uname) throws UserNotFoundException{
+		try{
+		Customer cc =  custRepo.findById(uname)
+			.orElseThrow( () -> new UserNotFoundException("User having username " + uname + " not found") );
 		return cc;
+		}
+		catch(UserNotFoundException ue){
+			System.out.println(ue.getMessage());
+			return null;
+		}
 	}
 
 	@Override
@@ -47,12 +54,19 @@ public class WalletServiceImpl implements WalletServiceInterface{
 	@Override
 	public boolean updateUser(Customer cust) {
 		String uname = cust.getUsername();
-		Customer customer = custRepo.findById(uname).get();
+		try {
+		Customer customer = custRepo.findById(uname)
+				.orElseThrow( () -> new UserNotFoundException("User is trying to change Username but it can't be changed "));
 		customer.setName(cust.getName());
 		customer.setMail(cust.getMail());
 		customer.setMob_number(cust.getMob_number());
 		custRepo.save(customer);
 		return true;
+		}
+		catch(UserNotFoundException ue) {
+			System.out.println(ue.getMessage());
+			return false;
+		}
 	}
 
 	@Override
@@ -64,13 +78,19 @@ public class WalletServiceImpl implements WalletServiceInterface{
 				uname=customer.getUsername();
 		}
 		 List<Customer> cust = custRepo.findByUsernameAndPassword(uname, pass);
-		 if(cust.isEmpty())
-			 return null;
-	 else {
-			 for (Customer customer : cust) {
-				 if(customer.getPassword().equals(pass))
-					 return customer;
-			 }
+		 try {
+				 if(cust.isEmpty())
+					 throw new UserNotFoundException("User Not Found");
+				 else {
+				 for (Customer customer : cust) {
+					 if(customer.getPassword().equals(pass))
+						 return customer;
+				 }
+				 return null;
+				 }
+		 }
+		 catch(UserNotFoundException ue) {
+			 System.out.println(ue.getMessage());
 			 return null;
 		 }
 	}
@@ -91,8 +111,11 @@ public class WalletServiceImpl implements WalletServiceInterface{
 	@Override
 	public boolean withdraw(Customer custer, double amt) {
 		Customer customer =  custRepo.findById(custer.getUsername()).get();
-		if(customer.getBalance() < amt)
-			return false;
+		
+		try {
+		if(customer.getBalance() < amt) {
+			throw new InsufficientFundsException("Insufficient Funds in Wallet");
+		}
 		else {
 			customer.setBalance(customer.getBalance() - amt);
 
@@ -103,6 +126,11 @@ public class WalletServiceImpl implements WalletServiceInterface{
 			custRepo.save(customer);
 			return true;
 		}
+		}catch(InsufficientFundsException ie) {
+			System.out.println(ie.getMessage());
+			return false;
+		}
+		
 	}
 
 	@Override
@@ -118,8 +146,9 @@ public class WalletServiceImpl implements WalletServiceInterface{
 			}	
 		}
 		if(flag==1) {
-			Customer sender =custRepo.getOne(suname);
-			Customer receiver =custRepo.getOne(runame);
+			Customer sender = custRepo.getOne(suname);
+			Customer receiver = custRepo.getOne(runame);
+			try {
 			if(sender.getBalance()>amount) {
 				sender.setBalance(sender.getBalance()-amount);
 				receiver.setBalance(receiver.getBalance()+amount);
@@ -135,7 +164,12 @@ public class WalletServiceImpl implements WalletServiceInterface{
 				return true;
 			}
 			else
+				throw new InsufficientFundsException("Insufficient Funds in Wallet");
+			}
+			catch(InsufficientFundsException ie) {
+				System.out.println(ie.getMessage());
 				return false;
+			}
 		}
 		else
 		return false;

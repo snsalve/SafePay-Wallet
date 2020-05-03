@@ -7,10 +7,12 @@ import org.springframework.stereotype.Service;
 
 import com.cg.entity.Customer;
 import com.cg.entity.Transactions;
+import com.cg.exceptions.InsufficientFundsException;
+import com.cg.exceptions.UserNotFoundException;
 @Service
 public interface WalletServiceInterface {
 	public List<Customer> getUsers();
-	public Optional<Customer> getUserById(String uname);
+	public Customer getUserById(String uname) throws UserNotFoundException;
 	public boolean createUser(Customer cust);
 	public boolean updateUser(Customer cust);
 	public Customer loginCredentials (long mobile, String pass);

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.entity.Customer;
 import com.cg.entity.Transactions;
+import com.cg.exceptions.InsufficientFundsException;
+import com.cg.exceptions.UserNotFoundException;
 import com.cg.service.WalletServiceInterface;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -37,19 +39,8 @@ public class WalletController {
 		return walletRepo.getUsers();
 	}
 	
-//	@GetMapping(value = "/getAllUsername")
-//	public List<String> getUsernames(){
-//		List<Customer> list = custRepo.findAll();
-//		List<String> names = new ArrayList<>();
-//		for (Customer customer : list) {
-//			String name = customer.getUsername();
-//			names.add(name);
-//		}
-//		return names;
-//	}
-	
 	@GetMapping(value = "/getUser/{username}")
-	public Optional<Customer> getUserById(@PathVariable("username")String uname){
+	public Customer getUserById(@PathVariable("username")String uname) throws UserNotFoundException{
 		return walletRepo.getUserById(uname);
 	}
 	
