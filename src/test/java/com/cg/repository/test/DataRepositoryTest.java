@@ -2,13 +2,8 @@ package com.cg.repository.test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +18,7 @@ import com.cg.repository.CustomerRepository;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 public class DataRepositoryTest {
+	
 	@Autowired
 	CustomerRepository customerRepository;
 	
