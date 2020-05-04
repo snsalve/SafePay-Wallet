@@ -76,7 +76,7 @@ public class WalletServiceImplTest {
 		Customer customerInDb = walletService.getUserById(customer.getUsername());
 		Customer customerFromDb = walletService.getUserById(customerInDb.getUsername());
 		
-		assertEquals(customerFromDb	, customerInDb);
+		assertEquals(customerFromDb, customerInDb);
 		
 	}
 	
