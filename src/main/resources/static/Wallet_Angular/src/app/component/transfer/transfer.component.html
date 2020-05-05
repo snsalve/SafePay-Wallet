@@ -94,7 +94,7 @@
 
               <div class="form-group">
                   <label for="mob_number" class="required">Mobile Number : </label>
-                  <input type="text" class="form-control" formControlName="mob_number" placeholder="Mobile Number"/>
+                  <input type="text" class="form-control" formControlName="mob_number" placeholder="Mobile Number" readonly/>
       
                   <div *ngIf="submitted && transferForm.controls.mob_number.errors" class="error">
                           <div class="text-danger" *ngIf="transferForm.controls.mob_number.errors.required">
