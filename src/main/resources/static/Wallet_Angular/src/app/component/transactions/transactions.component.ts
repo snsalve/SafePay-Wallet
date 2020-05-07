@@ -19,7 +19,9 @@ export class TransactionsComponent implements OnInit {
     if(this.user==null)
       this.router.navigate(['login']);
       
-    this.walletService.getTransactions(this.user).subscribe( data => this.trans=data );
+    this.walletService.getTransactions(this.user).subscribe( data => {
+      this.trans = data.sort((a,b) => b.trans_id - a.trans_id); 
+    });
   }
   
 }

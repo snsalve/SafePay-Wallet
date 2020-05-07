@@ -1,52 +1,3 @@
-<!-- <br>
-<h3 style="color: blue; text-align: center;">Welcome to new user Registration</h3>
-
-<div class="container-fluid">
-  <form #enForm ="ngForm" >
-         
-
-      <div class="form-group">
-          <label>Name</label>
-          <input required type="text"  [(ngModel)] = "cust.name" name="name" [class.is-invalid]="cname.invalid && cname.touched" class="form-control" #cname="ngModel"/>
-          <small class = "text-danger" [class.d-none] = "cname.valid || cname.untouched">Name is Mandatory</small>
-      </div>
-      <br>
-
-      <div class="form-group">
-        <label>Username</label>
-        <input required type="text"  [(ngModel)] = "cust.username" name="username" [class.is-invalid]="cusername.invalid && cusername.touched" class="form-control" #cusername="ngModel" maxlength="10" minlength="8" />
-        <small class = "text-danger" [class.d-none] = "cusername.valid || cusername.untouched">Username is Mandatory</small>
-    </div>
-    <br>
-
-      <div class="form-group">
-        <label>Password</label>
-        <input required type="password"  [(ngModel)] = "cust.password" name="password" [class.is-invalid]="cpass.invalid && cpass.touched" class="form-control" #cpass="ngModel" maxlength="10" minlength="8" />
-        <small class = "text-danger" [class.d-none] = "cpass.valid || cpass.untouched">Password is Mandatory</small>
-     </div>
-    <br>
-
-      <div class="form-group">
-        <label>Email</label>
-        <input required type="email"  [(ngModel)] = "cust.mail" name="mail" [class.is-invalid]="cmail.invalid && cmail.touched" class="form-control" #cmail="ngModel" />
-        <small class = "text-danger" [class.d-none] = "cmail.valid || cmail.untouched">Mail Id is Mandatory</small>
-    </div>
-    <br>
-
-    <div class="form-group">
-      <label>Mobile No.</label>
-      <input required type="number"  [(ngModel)] = "cust.mob_number" name="mob_number" [class.is-invalid]="cmob.invalid && cmob.touched" class="form-control" #cmob="ngModel" />
-      <small class = "text-danger" [class.d-none] = "cmob.valid || cmob.untouched">Mobile number is Mandatory</small>
-  </div>
-  <br>
-      <button [disabled]="enForm.form.invalid" class="btn btn-primary" (click)="newUser()">Register</button>&nbsp;&nbsp;&nbsp;&nbsp;
-      <button [disabled]="enForm.form.invalid" class="btn btn-primary" routerLink="/homepage">Login</button>   
-  </form>
-</div>
-<br>
-<br>
-<h6 style="color: blue;">Already Registered?</h6>
-<h6><a style="color: blue;" routerLink="/login">Click Here to Login.</a></h6><br> -->
 
 <br>
 <div class="col-md-12 col-lg-12">
@@ -138,7 +89,7 @@
                             Email is required..!
         
                         </div>
-                        <div class="text-danger" *ngIf="addForm.controls.mail.errors.mail ">
+                        <div class="text-danger" *ngIf="addForm.controls.mail.errors.email ">
                             Invalid Email Address..!
                         </div>
         

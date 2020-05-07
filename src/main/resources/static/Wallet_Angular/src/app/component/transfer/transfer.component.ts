@@ -23,13 +23,20 @@ export class TransferComponent implements OnInit {
     this.submitted=true
     if(this.transferForm.invalid)
       return;
-      let password=this.transferForm.controls.password.value;
-      if(password!=this.userdata1.password){
-        alert("Password Invalid");
-        return;
-      }
-    let amount = this.transferForm.controls.amount.value;
+
+    let password=this.transferForm.controls.password.value;
+    if(password!=this.userdata1.password){
+      alert("Password Invalid");
+      return;
+    }
+
     let mobile = this.transferForm.controls.mob_number.value;
+    if(mobile==this.userdata1.mob_number){
+      alert("Self transfer Not Allowed");
+      return;
+    }
+    
+    let amount = this.transferForm.controls.amount.value;
     console.log(this.mob);
     this.walletService.transfer(mobile, amount, password, this.user).subscribe(data=>{
       if(data)
