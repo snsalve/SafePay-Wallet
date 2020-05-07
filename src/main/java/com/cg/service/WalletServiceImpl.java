@@ -179,7 +179,6 @@ public class WalletServiceImpl implements WalletServiceInterface{
 	public List<Transactions> getTransaction(String uname) {
 		Customer customer =  custRepo.findById(uname).get();
 		List<Transactions> tlist = customer.getTransactionList();
-		Collections.reverse(tlist);
 		return tlist;
 	}
 
